@@ -12,8 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('points_registers', function (Blueprint $table) {
-            $table->id();
+
+
+            $table->unsignedBigInteger('user_id');
+           
+            $table->string('point_table_type');
+           
+            $table->integer('point_table_value');
+           
             $table->timestamps();
+        });
+        Schema::table('points_registers', function (Blueprint $table) {
+
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('point_table_type')->references('type')->on('point_tables')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('point_table_value')->references('point_value')->on('point_tables')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

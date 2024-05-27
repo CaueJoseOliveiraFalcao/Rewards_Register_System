@@ -1,0 +1,26 @@
+users 
+    id
+    nome
+    email
+    password
+    points
+    today_points
+point_tables
+    id
+    user_id
+    name
+    type XBOX/BING 
+    duration
+    is_streaked
+    streak
+    max_streak
+    point_value
+    is_completed
+points_registers
+    id
+    user_id
+    point_tables_id
+    register_date
+    point_tables_type
+    point_tables_point_value
+    
