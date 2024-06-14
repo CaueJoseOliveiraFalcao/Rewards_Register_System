@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('point_tables', function (Blueprint $table) {
             $table->id();
             $table->index('type');
+            $table->index('id');
             $table->index('point_value');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');

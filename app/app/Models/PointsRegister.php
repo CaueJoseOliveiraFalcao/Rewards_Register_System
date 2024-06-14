@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class PointsRegister extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'id',
+        'user_id',
+        'point_table_type',
+        'point_table_value',
+        'point_table_id'
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

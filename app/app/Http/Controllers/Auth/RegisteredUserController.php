@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\PointsRegister;
+use App\Models\PointTable;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -34,12 +36,36 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'points' => ['required','integer'],
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'points' => $request->points,
+            'today_points' => 0
+        ]);
+        
+        $userid = User::where('email' , $request->email)->first();
+        $tableMainP = PointTable::create([
+            'user_id'=> $userid->id,
+            'name'=> 'MAIN TABLE',
+            'type'=> 'MAIN TABLE',
+            'duration'=> 99999,
+            'is_streaked' => 0,
+            'streak' => 0,
+            'max_streak' => 0,
+            'point_value'=> $request->points,
+            'is_completed' => 1
+        ]);
+        $pointTable = PointTable::where('user_id', $userid->id)
+        ->where('name', $tableMainP->name)
+        ->first();
+        PointsRegister::create([
+            'user_id'=> $userid->id,
+            'point_table_type' => $pointTable->type,
+            'point_table_value' => $pointTable->point_value,
+            'point_table_id' => $pointTable->id
         ]);
 
         event(new Registered($user));

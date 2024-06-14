@@ -15,6 +15,12 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+                <!-- Email Address -->
+        <div class="mt-4">
+            <x-input-label for="points" :value="__('Pontos atuais')" />
+            <x-text-input id="points" class="block mt-1 w-full" type="number" name="points" :value="old('points')" required  />
+            <x-input-error :messages="$errors->get('points')" class="mt-2" />
+        </div>
 
         <!-- Password -->
         <div class="mt-4">

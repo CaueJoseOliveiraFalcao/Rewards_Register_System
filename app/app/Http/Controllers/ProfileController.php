@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-
 class ProfileController extends Controller
 {
     /**
@@ -20,7 +19,15 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
+    public function editPoints(Request $request) : RedirectResponse
+    {
+        request()->validate([
+            'points' => ['required' , 'integer']
+        ]);
+        Auth::user()->points = $request->pointsToEdit;
 
+        return redirect(RouteServiceProvider::HOME);
+    }
     /**
      * Update the user's profile information.
      */
