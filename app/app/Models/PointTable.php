@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PointTable extends Model
@@ -21,10 +22,13 @@ class PointTable extends Model
         'point_value',
         'is_completed'
     ];
-
-    public function comments(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
+    }
+    public function comments(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
     public function pointsRegisters()
     {

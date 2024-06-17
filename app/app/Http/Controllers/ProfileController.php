@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\PointTable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Providers\RouteServiceProvider;
 class ProfileController extends Controller
 {
     /**
@@ -24,8 +26,11 @@ class ProfileController extends Controller
         request()->validate([
             'points' => ['required' , 'integer']
         ]);
-        Auth::user()->points = $request->pointsToEdit;
-
+        $userIdAuth = Auth::user()->id;
+        $userTablePointMain = PointTable::where('user_id', $userIdAuth)
+        ->where('name', 'MAIN TABLE')->first();
+        $userTablePointMain->point_value = $request->points;
+        $userTablePointMain->save();
         return redirect(RouteServiceProvider::HOME);
     }
     /**

@@ -1,3 +1,4 @@
+
     <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -12,12 +13,7 @@
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
-    <form method="post" action="{{ route('profile.editP') }}" class="mt-6 space-y-6">
-        @csrf
-        <label for="points">TROCAR NUMERO DE PONTOS (nao recomendado)</label>
-        <input type="number" name="points">
-        <button>EDITAR PONTOS</button>
-    </form>
+ 
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Auth;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -49,9 +49,17 @@ class User extends Authenticatable
      *
      * @return 
      */
-    public function user(): BelongsTo
+    public function point(): HasMany
     {
-        return $this->belongsTo(PointTable::class);
+        return $this->hasMany(PointTable::class);
+    }
+    
+    public function getPointTableInfo()
+    {
+        $userId =  Auth::user()->id;
+        $userTablePointMain = PointTable::where('user_id', $userId)
+        ->where('name', 'MAIN TABLE')->first();
+        return $userTablePointMain;
     }
     public function pointsRegisters() : HasMany
     {
