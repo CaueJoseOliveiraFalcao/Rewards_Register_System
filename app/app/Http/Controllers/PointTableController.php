@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PointsRegister;
 use App\Models\PointTable;
 use Illuminate\Http\Request;
-
+use App\Providers\RouteServiceProvider;
+use Auth;
 class PointTableController extends Controller
 {
     /**
@@ -12,15 +14,40 @@ class PointTableController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        request()->validate([
+            'task_name' => ['required' , 'string'],
+            'table_type' => ['required','string'],
+            'points_value' => ['required','integer'] 
+        ]);
+        $userid = Auth::user()->id;
+
+        if ($request->daily_accumulation == "on") {
+            $isStreak = 1;
+        } else{
+            $isStreak = 0;
+            $request->current_sequence = 0;
+        }
+        $initialTable = PointTable::create([
+            'name' => $request->task_name,
+            'user_id' => $userid,
+            'type' => $request->table_type,
+            'duration' => 0,
+            'is_streaked' => $isStreak,
+            'streak' => $request->current_sequence, 
+            'max_streak' => 0,
+            'point_value' => $request->points_value,
+            'is_completed' => 0,
+        ]);
+        $initialTable->save();
+        return redirect(RouteServiceProvider::HOME);
     }
 
     /**
@@ -36,7 +63,7 @@ class PointTableController extends Controller
      */
     public function show(PointTable $pointTable)
     {
-        //
+        return view("pointTableCreator");
     }
 
     /**

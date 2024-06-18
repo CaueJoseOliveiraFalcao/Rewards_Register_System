@@ -53,7 +53,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(PointTable::class);
     }
-    
+    public function getValidTables()
+    {
+        $userId =  Auth::user()->id;
+
+        $userTablePointMain = PointTable::where('user_id', $userId)
+        ->where('name', '!=' , 'MAIN TABLE')
+        ->get();
+        return $userTablePointMain;
+    }
     public function getPointTableInfo()
     {
         $userId =  Auth::user()->id;
