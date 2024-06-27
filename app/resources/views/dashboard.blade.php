@@ -34,7 +34,7 @@
                 <div class='flex'>
                     <div class="task-complete mr-2">
                         <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
-                            <a href="{{ $info->is_completed ? '#' : 'N'}}">
+                            <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
                             {{ $info->is_completed ? '✔️' : 'X' }}
                             </a>
                         </div>

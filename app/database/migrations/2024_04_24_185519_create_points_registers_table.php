@@ -16,7 +16,8 @@
                 $table->id();
 
                 $table->unsignedBigInteger('user_id');
-            
+        
+                $table->string('table_name')->nullable();
                 $table->string('point_table_type')->nullable();
             
                 $table->integer('point_table_value')->nullable();

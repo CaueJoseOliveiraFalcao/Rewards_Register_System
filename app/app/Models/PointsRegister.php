@@ -13,7 +13,8 @@ class PointsRegister extends Model
         'user_id',
         'point_table_type',
         'point_table_value',
-        'point_table_id'
+        'point_table_id',
+        'table_name'
     ];
     public function user()
     {

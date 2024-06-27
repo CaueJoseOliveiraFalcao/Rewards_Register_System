@@ -63,6 +63,7 @@ class RegisteredUserController extends Controller
         ->first();
         PointsRegister::create([
             'user_id'=> $userid->id,
+            'table_name' > $pointTable->name,
             'point_table_type' => $pointTable->type,
             'point_table_value' => $pointTable->point_value,
             'point_table_id' => $pointTable->id

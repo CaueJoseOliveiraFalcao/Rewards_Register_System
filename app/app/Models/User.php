@@ -3,11 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Controllers\PointRegister;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\PointsRegister;
+use App\Models\PointTable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Auth;
 class User extends Authenticatable
@@ -56,7 +59,6 @@ class User extends Authenticatable
     public function getValidTables()
     {
         $userId =  Auth::user()->id;
-
         $userTablePointMain = PointTable::where('user_id', $userId)
         ->where('name', '!=' , 'MAIN TABLE')
         ->get();
@@ -68,6 +70,32 @@ class User extends Authenticatable
         $userTablePointMain = PointTable::where('user_id', $userId)
         ->where('name', 'MAIN TABLE')->first();
         return $userTablePointMain;
+    }
+    public function getPointsRegisters()
+    {
+        $userId =  Auth::user()->id;
+        $userTablePointMain = PointsRegister::where('user_id', $userId)
+        ->where('table_name', '!=' , 'MAIN TABLE')
+        ->get();
+        return $userTablePointMain;
+    }
+    public function verifyUserTaskStatus()
+    {
+        $user  = Auth::user();
+        $allUserRegisters = $this->getPointsRegisters();
+        $today = now()->format('Y-m-d');
+        $today = '2024-06-27';
+        foreach ($allUserRegisters as $key => $register) {
+
+            if ($today != $register->created_at->format('Y-m-d')){
+                $tablePoint = PointTable::where('id', $register->point_table_id)->first();
+                if ($tablePoint->is_completed === 1) {
+                    $tablePoint->is_completed = 0;
+                }
+                $tablePoint->save();
+            }
+        }
+        PointsRegister::where('user_id', $user->id);
     }
     public function pointsRegisters() : HasMany
     {
