@@ -13,6 +13,7 @@ use App\Models\PointsRegister;
 use App\Models\PointTable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Auth;
+use PHPUnit\Framework\Constraint\IsEmpty;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -83,8 +84,30 @@ class User extends Authenticatable
     {
         $user  = Auth::user();
         $allUserRegisters = $this->getPointsRegisters();
+        $allUserTables = $this->getValidTables();
+        //verifica se a tabela do usurio tem algum registro no banco de dados
+        foreach ($allUserTables as $key => $table) {
+            $foundRegister = false;
+            if ($allUserRegisters->isEmpty()){
+                $foundRegister = false;
+            }
+            else{
+                foreach ($allUserRegisters as $key => $register) {
+                    if ($register->point_table_id === $table->id) {
+                        $foundRegister = true;
+                        break;
+                    }
+    
+                }
+            }
+
+            if ($foundRegister === false) {
+                $table->is_completed = 0;
+            }
+            $table->save();
+    }
+        //verifica se os registros que estao no banco de dados do usuario estão no dia de hoje
         $today = now()->format('Y-m-d');
-        $today = '2024-06-27';
         foreach ($allUserRegisters as $key => $register) {
 
             if ($today != $register->created_at->format('Y-m-d')){
