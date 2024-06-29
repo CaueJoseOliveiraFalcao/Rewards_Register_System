@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExtraPointsController;
 use App\Http\Controllers\PointRegister;
 use App\Http\Controllers\PointTableController;
 use App\Http\Controllers\ProfileController;
@@ -30,7 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/create-register/{id}', [PointRegister::class, 'createRegister'])->name('register.create');
-
+    Route::get('/create-extra-point', [ExtraPointsController::class, 'show'])->name('extraP');
+    Route::post('/sendExtraPoint', [ExtraPointsController::class, 'store'])->name('extraPCreate');
 });
 
 require __DIR__.'/auth.php';

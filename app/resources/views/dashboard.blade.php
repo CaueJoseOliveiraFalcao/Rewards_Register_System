@@ -15,6 +15,7 @@
     <div class="flex flex-col justify-content-center items-center">
         <div class="flex flex-col justify-content-center items-center">
             <h1>Pontos : {{Auth::user()->getPointTableInfo()->point_value}}</h1>
+            <h2>Pontos Hoje : {{$todayPoints}}</h2>
                 <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('dashboard')">
                                 {{ __('EDITAR PONTOS') }}
                 </x-nav-link>    

@@ -111,17 +111,47 @@ class User extends Authenticatable
         foreach ($allUserRegisters as $key => $register) {
 
             if ($today != $register->created_at->format('Y-m-d')){
+
                 $tablePoint = PointTable::where('id', $register->point_table_id)->first();
                 if ($tablePoint->is_completed === 1) {
                     $tablePoint->is_completed = 0;
                 }
                 $tablePoint->save();
             }
+            if($today === $register->created_at->format('Y-m-d')){
+
+                $tablePoint = PointTable::where('id', $register->point_table_id)->first();
+
+                if ($tablePoint->is_completed === 0) {
+                    $tablePoint->is_completed = 1;
+                }
+                $tablePoint->save();
+            }
         }
         PointsRegister::where('user_id', $user->id);
+    }
+    public function getTodayPoints()
+    {
+        $user = Auth::user();
+        $allUserRegisters = $this->getPointsRegisters();
+        $today = now()->format('Y-m-d');
+        $todayPoints = 0;
+        if (!$allUserRegisters->isEmpty()) {
+            foreach ($allUserRegisters as $key => $register) {
+                if($register->created_at->format('Y-m-d') == $today){
+                    $todayPoints += $register->point_table_value;
+                }
+            }
+        }
+        return $todayPoints;
+
     }
     public function pointsRegisters() : HasMany
     {
         return $this->hasMany(PointsRegister::class);
+    }
+    public function extraPoints() : HasMany
+    {
+        return $this->hasMany(ExtraPoints::class);
     }
 }

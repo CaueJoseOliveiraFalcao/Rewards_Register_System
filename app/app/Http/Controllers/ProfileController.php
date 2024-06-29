@@ -19,7 +19,8 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $user->verifyUserTaskStatus();
-        return view('dashboard');
+        $todayPoints = $user->getTodayPoints();
+        return view('dashboard' , compact('todayPoints'));
     }
     public function edit(Request $request): View
     {

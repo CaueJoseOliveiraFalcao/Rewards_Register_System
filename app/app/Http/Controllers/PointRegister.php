@@ -22,7 +22,6 @@ class PointRegister extends Controller
                 'point_table_id' => $table->id,
                 'table_name' => $table->name
             ]);
-            $table->is_completed = 1;
             if ($table->is_streaked){
                 $table->streak += 1;
             }
