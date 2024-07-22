@@ -20,6 +20,18 @@ class PointTableController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function table($id) {
+        $user = Auth::user();
+
+        $points = PointTable::find($id);  
+
+        if ($points->user_id == $user->id) {
+            return view("edit-task" , compact('points'));
+        }
+        else{
+            return redirect("dashboard");
+        }
+    }
     public function create(Request $request)
     {
         request()->validate([

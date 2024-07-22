@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\PointTable;
 use Auth;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
@@ -20,6 +21,11 @@ class ExtraPointsController extends Controller
             'type' => $request->task_type,
             'point_value' => $request->points_value,
         ]);
+
+        $userTablePointMain = PointTable::where('user_id', $user->id)
+        ->where('name', 'MAIN TABLE')->first();
+        $userTablePointMain->point_value += $request->points_value;
+        $userTablePointMain->save();    
         $extra->save();
         return redirect(RouteServiceProvider::HOME);
     }

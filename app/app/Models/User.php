@@ -80,6 +80,13 @@ class User extends Authenticatable
         ->get();
         return $userTablePointMain;
     }
+    public function getExtraPoints()
+    {
+        $userId =  Auth::user()->id;
+        $userTablePointMain = ExtraPoints::where('user_id', $userId)
+        ->get();
+        return $userTablePointMain;
+    }
     public function verifyUserTaskStatus()
     {
         $user  = Auth::user();
@@ -134,12 +141,20 @@ class User extends Authenticatable
     {
         $user = Auth::user();
         $allUserRegisters = $this->getPointsRegisters();
+        $allUserExtraPoints = $this->getExtraPoints();
         $today = now()->format('Y-m-d');
         $todayPoints = 0;
         if (!$allUserRegisters->isEmpty()) {
             foreach ($allUserRegisters as $key => $register) {
                 if($register->created_at->format('Y-m-d') == $today){
                     $todayPoints += $register->point_table_value;
+                }
+            }
+        }
+        if (!$allUserExtraPoints->isEmpty()) {
+            foreach ($allUserExtraPoints as $key => $register) {
+                if($register->created_at->format('Y-m-d') == $today){
+                    $todayPoints += $register->point_value;
                 }
             }
         }

@@ -20,6 +20,9 @@
                     <x-nav-link :href="route('profile.tablePointC')" :active="request()->routeIs('profile.tablePointC')">
                         {{ __('Criar Nova Tabela Recorente') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('extraP')" :active="request()->routeIs('extraP')">
+                        {{ __('Adicionar Pontos Extras') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -10,6 +10,8 @@
             {{ __('Dashboard') }}
         </h2>
         <a href="/tablePointCreator">CRIAR TAREFA</a>
+
+
     </x-slot>
 
     <div class="flex flex-col justify-content-center items-center">
