@@ -20,6 +20,7 @@ class PointTableController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    
     public function table($id) {
         $user = Auth::user();
 
@@ -27,6 +28,35 @@ class PointTableController extends Controller
 
         if ($points->user_id == $user->id) {
             return view("edit-task" , compact('points'));
+        }
+        else{
+            return redirect("dashboard");
+        }
+    }
+    public function edit(Request $request) {
+        $user = Auth::user();
+        $mainTable = $user->getPointTableInfo();
+        $points = PointTable::find($request->table_id);  
+
+        if ($points->user_id == $user->id) {
+            $points->name = $request->task_name;
+            $points->type = $request->table_type;
+            $points->point_value = $request->points_value;
+            if ($request->istreak === "on") {
+                $points->is_streaked = 1;
+                $points->streak = $request->current_sequence;
+            }
+            if($request->reset === 'on' && $points->is_completed === 1) {
+                $userTablePointMain = PointsRegister::where('user_id', $user->id)->where('table_name', $points->name)->latest()->first();
+                if ($userTablePointMain) {
+                    $userTablePointMain->delete();
+                }
+                $points->is_completed = 0;
+                $mainTable->point_value -= $request->points_value;
+            }
+            $points->save();
+            $mainTable->save();
+            return redirect(RouteServiceProvider::HOME);
         }
         else{
             return redirect("dashboard");
@@ -81,10 +111,6 @@ class PointTableController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PointTable $pointTable)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -97,8 +123,18 @@ class PointTableController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PointTable $pointTable)
+    public function delete(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        $points = PointTable::find($request->post_id);  
+
+        if ($points->user_id == $user->id) {
+            $points->delete();
+            return redirect("dashboard");
+        }
+        else{
+            return redirect("dashboard");
+        }
     }
 }

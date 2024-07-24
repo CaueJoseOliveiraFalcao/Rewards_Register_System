@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-extra-point', [ExtraPointsController::class, 'show'])->name('extraP');
     Route::post('/sendExtraPoint', [ExtraPointsController::class, 'store'])->name('extraPCreate');
     Route::get('/edit-table/{id}', [PointTableController::class, 'table'])->name('Sedittable');
+    Route::post('/edit-table', [PointTableController::class, 'edit'])->name('EditTable');
+    Route::post('/delete-table', [PointTableController::class, 'delete'])->name('deleteTable');
 });
 
 require __DIR__.'/auth.php';

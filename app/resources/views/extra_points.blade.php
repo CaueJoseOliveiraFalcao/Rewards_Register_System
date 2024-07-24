@@ -1,20 +1,30 @@
 
 <form action="/sendExtraPoint" method="POST">
-    @csrf
     <h1>Pontos Extra</h1>
     @csrf <!-- CSRF token for Laravel -->
     <label for="task_name">Nome da Tarefa:</label>
     <input type="text" id="task_name" name="task_name" required><br>
-
+    <input type="hidden" id="server_value" name="" value="{{$mainTable->point_value}}">
     <label for="table_type">Tipo da Tabela:</label>
     <select id="table_type" name="table_type" required>
         <option value="XBOX">XBOX</option>
         <option value="BING">BING</option>
     </select><br>
     <label for="points_value">Valor em pontos da Tarefa:</label>
-    <input type="number" id="points_value" name="points_value" required><br>
-
+    <input type="number"  id="value" name="points_value" required><br>
+    <p>VALOR DE PONTOS APOS ALTERAÇÃO : <span id="final_value">{{$mainTable->point_value}}</span></p>
     <input type="submit" value="Submit">
+    <script>
+                var UserInput = document.getElementById('value')
+        function updateFinalPoints() {
+            var ServerValue = parseInt(document.getElementById('server_value').value);
+            var userP = parseInt(document.getElementById('value').value);
+            var sum = ServerValue + userP;
+            document.getElementById('final_value').textContent = sum;
+        }
+        UserInput.addEventListener('input' , updateFinalPoints);
+
+    </script>
 </form>
 <style>
     .check-fix{

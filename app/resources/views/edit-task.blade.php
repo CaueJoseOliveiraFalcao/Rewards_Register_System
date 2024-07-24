@@ -1,8 +1,9 @@
 
-<form action="/sendExtraPoint" method="POST">
+<form action="/edit-table" method="POST">
     @csrf
     <h1>Pontos Extra</h1>
     @csrf <!-- CSRF token for Laravel -->
+    <input type="hidden" id="server_value" name="table_id" value="{{$points->id}}">
     <label for="task_name">Nome da Tarefa:</label>
     <input type="text" id="task_name" value="{{$points->name}}" name="task_name" required><br>
     <label for="table_type">Tipo da Tabela:</label>
@@ -11,16 +12,16 @@
         <option value="BING" {{ $points->type == 'BING' ? 'selected' : '' }}>BING</option>
     </select><br>
     <div class="check-fix">
-        <label for="daily_accumulation">Tem Sequencia Diaria:</label>
-        <input id="istreak" {{$points->is_streaked ? 'checked' : ''}} type="checkbox" id="daily_accumulation" name="daily_accumulation">
+        <label for="istreak">Tem Sequencia Diaria:</label>
+        <input id="istreak" {{$points->is_streaked ? 'checked' : ''}} type="checkbox" name="istreak">
     </div>
     <div class="hiddenItems" style="display: {{$points->is_streaked ? 'block' : 'none'}};">
         <label for="current_sequence">Sequencia atual da tarefa:</label>
         <input type="number" value="{{$points->streak}}" id="current_sequence" name="current_sequence"><br>
     </div>
     <div class="check-fix">
-        <label for="daily_accumulation">Deseja Resetar Para Completar novamente? (irá subitrair os pontos)</label>
-        <input type="checkbox" id="daily_accumulation" name="daily_accumulation">
+        <label for="reset">Deseja Resetar Para Completar novamente? (irá subitrair os pontos)</label>
+        <input type="checkbox" id="reset" name="reset">
     </div>
     <label for="points_value">Valor em pontos da Tarefa:</label>
     <input type="number" value='{{$points->point_value}}' id="points_value" name="points_value"><br>
@@ -40,6 +41,11 @@
         })
     </script>
     <input type="submit" value="Submit">
+</form>
+<form action="/delete-table" method="POST">
+    @csrf
+    <input type="hidden" name="post_id" value="{{$points->id}}">
+    <input type="submit" style="background-color: red" value="DELETAR TABELA">
 </form>
 <style>
     .check-fix{

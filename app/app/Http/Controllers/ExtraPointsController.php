@@ -9,9 +9,11 @@ use App\Models\ExtraPoints;
 class ExtraPointsController extends Controller
 {
     public function show(){
-        return view("extra_points");
+        $user = Auth::user();
+        $mainTable = $user->getPointTableInfo();
+        return view("extra_points" , compact("mainTable"));
     }
-
+    
     public function store(Request $request){
         $user = Auth::user();
 
