@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="edit-div">
-                    <a href="#">✏️</a>
+                    <a href="/edit-table/{{$info->id}}">✏️</a>
                     </div>
                 </div>
 
