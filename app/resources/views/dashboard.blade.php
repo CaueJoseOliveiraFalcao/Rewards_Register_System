@@ -50,6 +50,28 @@
         </div>
 
         @endforeach
+        <div>
+            <h1 class="text-center mt-9">PONTOS EXTRAS</h1>
+        <div class="task-container">
+            @foreach(Auth::user()->getExtraPoints() as $info)
+            <div class='each-div'>
+                <div class="task-name"><span>{{ $info->table_name }}</span></div>
+                    <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
+                    <div class='flex'>
+                        <div class="task-complete mr-2">
+                            <div class="task-button-confirm delete">
+                                <form method="POST" action="delete-extra-point/{{$info->id}}">
+                                    @csrf
+                                    <input value="🗑️" type="submit"/>
+                                        
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    
+            @endforeach
+        
 </div>
 
     </div>
@@ -74,6 +96,9 @@
     }
     .task-button-confirm.completed{
         background-color: green!important;
+    }
+    .task-button-confirm.delete{
+        background-color: red!important;
     }
     .task-container{
         display: flex;

@@ -31,4 +31,16 @@ class ExtraPointsController extends Controller
         $extra->save();
         return redirect(RouteServiceProvider::HOME);
     }
+    public function delete($id){
+        $user = Auth::user();
+        $extra = ExtraPoints::find($id);
+        if($extra->user_id != $user->id){
+            return redirect(RouteServiceProvider::HOME);
+        }
+        $mainTable = $user->getPointTableInfo();
+        $mainTable->point_value -= $extra->point_value;
+        $extra->delete();
+        $mainTable->save();
+        return redirect(RouteServiceProvider::HOME);
+    }
 }
