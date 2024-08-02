@@ -25,33 +25,103 @@
     </div>
 
     <div>
-        <h1 class="text-center mt-9">TAREFAS</h1>
+        <h2 class="text-tite">TAREFAS VARIAVEIS </h2>
+    <div class="task-container">
+            @foreach(Auth::user()->getValidTables() as $info)
+                @if($info->type === "BING_VARIAVEL" || $info->type === "XBOX_VARIAVEL")
+                    <div class='each-div'>
+                        <div class="card">
+                            <div class="flex">
+                                <div class="task-name"><span>{{ $info->name }}</span></div>
+                                @if ($info->streak > 0)
+                                <div class="task-sequence">🔥 <span>{{ $info->streak }}</span></div>
+                                @endif
+                            </div>
+
+                            <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
+                            <div class='flex'>
+                                <div class="task-complete mr-2">
+                                    <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
+                                        <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
+                                        {{ $info->is_completed ? '✔️' : 'X' }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="edit-div">
+                                <a href="/edit-table/{{$info->id}}">✏️</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                @endif
+            @endforeach
+    </div>
+        <h2 class="text-tite">TAREFAS BING </h2>
+    <div class="task-container">
+            @foreach(Auth::user()->getValidTables() as $info)
+                @if($info->type === "BING")
+                    <div class='each-div' style="background-color: #87CEEB">
+                        <div class="card">
+                            <div class="flex">
+                                <div class="task-name"><span>{{ $info->name }}</span></div>
+                                @if ($info->streak > 0)
+                                <div class="task-sequence">🔥 <span>{{ $info->streak }}</span></div>
+                                @endif
+                            </div>
+
+                            <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
+                            <div class='flex'>
+                                <div class="task-complete mr-2">
+                                    <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
+                                        <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
+                                        {{ $info->is_completed ? '✔️' : 'X' }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="edit-div">
+                                <a href="/edit-table/{{$info->id}}">✏️</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                @endif
+            @endforeach
+    </div>
+    <h2 class="text-tite">TAREFAS XBOX </h2>
     <div class="task-container">
         @foreach(Auth::user()->getValidTables() as $info)
-        <div class='each-div'>
-            <div class="task-name"><span>{{ $info->name }}</span></div>
-                @if ($info->streak > 0)
-                <div class="task-sequence">🔥 <span>{{ $info->streak }}</span></div>
-                @endif
-                <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
-                <div class='flex'>
-                    <div class="task-complete mr-2">
-                        <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
-                            <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
-                            {{ $info->is_completed ? '✔️' : 'X' }}
-                            </a>
+            @if($info->type === "XBOX")
+                <div class='each-div' style="background-color: #107C10;">
+                    <div class="card">
+                        <div class="flex">
+                            <div class="task-name"><span>{{ $info->name }}</span></div>
+                            @if ($info->streak > 0)
+                            <div class="task-sequence">🔥 <span>{{ $info->streak }}</span></div>
+                            @endif
+                        </div>
+
+                        <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
+                        <div class='flex'>
+                            <div class="task-complete mr-2">
+                                <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
+                                    <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
+                                    {{ $info->is_completed ? '✔️' : 'X' }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="edit-div">
+                            <a href="/edit-table/{{$info->id}}">✏️</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="edit-div">
-                    <a href="/edit-table/{{$info->id}}">✏️</a>
-                    </div>
+
                 </div>
-
-        </div>
-
+            @endif
         @endforeach
-        <div>
-            <h1 class="text-center mt-9">PONTOS EXTRAS</h1>
+</div>
+        <h1 class="text-tite">PONTOS EXTRAS</h1>
         <div class="task-container">
             @foreach(Auth::user()->getExtraPoints() as $info)
             <div class='each-div'>
@@ -71,13 +141,17 @@
             </div>
     
             @endforeach
-        
-</div>
+    </div>
 
     </div>
 </x-app-layout>
 
 <style>
+    .text-tite{
+        font-size: 15px;
+        padding-left: 3rem;
+        margin: 0
+    }
     .edit-div{
         width: 30px;
         height: 30px;
@@ -102,19 +176,27 @@
     }
     .task-container{
         display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+        flex-wrap: wrap;
+        padding-left: 3rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        gap: 1rem;
+        width: 100%;
+        flex-direction: row;
     }
     .each-div{
         padding: 1rem;
-        background-color: greenyellow;
+        background-color: rgb(31 41 55);
         border-radius: 6px;
-        margin-bottom: 1rem;
+        color: white;
+        width: 250px;
+        height: 150px;
+    }
+    .card{
         display: flex;
-        width: 1000px;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
+        justify-content: space-between; /* Distribui o espaço entre os itens igualmente */
+        height: 100%; /* Garante que o card use toda a altura disponível */
     }
 </style>
