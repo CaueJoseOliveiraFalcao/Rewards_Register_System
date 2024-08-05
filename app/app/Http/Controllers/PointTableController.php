@@ -37,7 +37,6 @@ class PointTableController extends Controller
         $user = Auth::user();
         $mainTable = $user->getPointTableInfo();
         $points = PointTable::find($request->table_id);  
-
         if ($points->user_id == $user->id) {
             $points->name = $request->task_name;
             $points->type = $request->table_type;

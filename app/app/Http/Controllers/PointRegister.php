@@ -32,4 +32,14 @@ class PointRegister extends Controller
 
             return redirect(RouteServiceProvider::HOME);
     }
+    public function status(Request $request){
+        return view('estatistics');
+    }
+    public function return_status(Request $request){
+
+        $user = Auth::user();
+
+        $result = $user->getMonthPoints($request->month , $request->year);
+        return view('month-points' , compact('result'));
+    }
 }

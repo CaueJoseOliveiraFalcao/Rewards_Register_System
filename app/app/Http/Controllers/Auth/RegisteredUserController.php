@@ -256,6 +256,7 @@ class RegisteredUserController extends Controller
             'point_value'=> 1000,
             'is_completed' => 0
         ]);
+        
         $pointTable = PointTable::where('user_id', $userid->id)
         ->where('name', $tableMainP->name)
         ->first();

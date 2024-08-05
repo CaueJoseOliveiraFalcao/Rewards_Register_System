@@ -37,7 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-table/{id}', [PointTableController::class, 'table'])->name('Sedittable');
     Route::post('/edit-table', [PointTableController::class, 'edit'])->name('EditTable');
     Route::post('/delete-table', [PointTableController::class, 'delete'])->name('deleteTable');
-
+    Route::get('/show-status', [PointRegister::class, 'status'])->name('status');
+    Route::post('/get-status', [PointRegister::class, 'return_status'])->name('return_status');
 });
 
 require __DIR__.'/auth.php';

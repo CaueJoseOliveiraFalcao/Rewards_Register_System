@@ -1,7 +1,7 @@
 
 <form action="/edit-table" method="POST">
     @csrf
-    <h1>Pontos Extra</h1>
+    <h1>Editar Tarefa</h1>
     @csrf <!-- CSRF token for Laravel -->
     <input type="hidden" id="server_value" name="table_id" value="{{$points->id}}">
     <label for="task_name">Nome da Tarefa:</label>
@@ -10,6 +10,8 @@
     <select id="table_type" name="table_type" required>
         <option value="XBOX" {{ $points->type == 'XBOX' ? 'selected' : '' }}>XBOX</option>
         <option value="BING" {{ $points->type == 'BING' ? 'selected' : '' }}>BING</option>
+        <option value="BING_VARIAVEL" {{ $points->type == 'BING_VARIAVEL' ? 'selected' : '' }}>BING_VARIAVEL</option>
+        <option value="XBOX_VARIAVEL" {{ $points->type == 'XBOX_VARIAVEL' ? 'selected' : '' }}>XBOX_VARIAVEL</option>
     </select><br>
     <div class="check-fix">
         <label for="istreak">Tem Sequencia Diaria:</label>

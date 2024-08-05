@@ -161,6 +161,38 @@ class User extends Authenticatable
         return $todayPoints;
 
     }
+    public function getMonthPoints($mounth , $year)
+    {
+        $user = Auth::user();
+        $allUserRegisters = $this->getPointsRegisters();
+        $allUserExtraPoints = $this->getExtraPoints();
+
+        $allUserRegistersThisMonth = [];
+        $allUserExtraPointsThisMonth = [];
+
+        foreach ($allUserRegisters as $key => $register) {
+
+            $registerYear = $register->created_at->format('Y');
+            $registerMonth = $register->created_at->format('m');
+            if($year == $registerYear && $registerMonth == $mounth){
+                $allUserRegistersThisMonth[] = $register;
+            }
+        }
+        
+        foreach ($allUserExtraPoints as $key => $register) {
+
+            $registerYear = $register->created_at->format('Y');
+            $registerMonth = $register->created_at->format('m');
+            if($year == $registerYear && $registerMonth == $mounth){
+                $allUserExtraPointsThisMonth[] = $register;
+            }
+        }
+        return [
+            'registers' => $allUserRegistersThisMonth,
+            'extraPoints' => $allUserExtraPointsThisMonth,
+        ];
+
+    }
     public function pointsRegisters() : HasMany
     {
         return $this->hasMany(PointsRegister::class);
