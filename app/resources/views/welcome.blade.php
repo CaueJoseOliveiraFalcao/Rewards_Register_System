@@ -21,7 +21,8 @@
         <div class="bg-teal-400 p-4 rounded-sm flex justify-center items-center flex-col">
             <h1 class="text-center text-white  my-3  text-xl">Registro de Pontos do Rewards</h1>
             <p>sistema para registro de pontos , estatistica de desempenho</p>
-            <button class="bg-green-600 p-5 my-3 text-white rounded-xl text-center w-1/2" >Cadastro</button>
+            <a href="/register" class="bg-green-600 p-5 my-3 text-white rounded-xl text-center w-1/2" >Cadastro</a>
+            <a href="/login" class="bg-green-600 p-5 my-3 text-white rounded-xl text-center w-1/2" >Login</a>
         </div>
     </body>
 </html>

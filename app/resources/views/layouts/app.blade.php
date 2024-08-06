@@ -14,6 +14,11 @@
         <!-- Scripts -->
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif!important;
+        }
+    </style>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-white-100 ">
             @include('layouts.navigation')

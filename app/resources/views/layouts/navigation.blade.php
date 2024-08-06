@@ -23,6 +23,9 @@
                     <x-nav-link :href="route('extraP')" :active="request()->routeIs('extraP')">
                         {{ __('Adicionar Pontos Extras') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
+                        {{ __('Relatorio de Tarefas') }}
+                    </x-nav-link>
                 </div>
             </div>
 

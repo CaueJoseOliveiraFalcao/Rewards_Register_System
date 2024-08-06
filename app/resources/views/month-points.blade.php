@@ -34,7 +34,7 @@
 <body>
     <h1>Registros deste Mês</h1>
     @if (isset($result['registers']) && count($result['registers']) > 0)
-        <table>
+        <table class="m-0 p-0">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -49,9 +49,21 @@
                         <td>{{$register->table_name}}</td>
                         <td>{{$register->point_table_type}}</td>
                         <td>{{ \Carbon\Carbon::parse($register['created_at'])->format('d/m/Y H:i') }}</td>
-                        <td>{{ $register->point_table_value}}</td>
+                        <td class="points_values">{{ $register->point_table_value}}</td>
                     </tr>
                 @endforeach
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Total de Tarefas do Mês</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="insertSum"></td>
+                </tr>
             </tbody>
         </table>
     @else
@@ -66,6 +78,7 @@
                     <th>Nome</th>
                     <th>Data</th>
                     <th>Pontos</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +87,7 @@
                         <td>{{$extraPoint->table_name}}</td>
                         <td>{{ \Carbon\Carbon::parse($extraPoint['created_at'])->format('d/m/Y H:i') }}</td>
                         <td>{{ $extraPoint->point_value}}</td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -82,4 +96,19 @@
         <p class="no-data">Não há pontos extras para este mês.</p>
     @endif
 </body>
+<script>
+    const values = document.querySelectorAll('.points_values');
+    let sum = 0;
+    values.forEach(element => {
+        sum += parseInt(element.textContent);
+    });
+    console.log(sum);
+    document.querySelector(".insertSum").innerHTML = sum;
+</script>
+<style>
+    th,td {
+        padding: 0.5rem;
+    }
+</style>
 </html>
+
