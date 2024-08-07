@@ -3,7 +3,7 @@
            font-size: 50px!important; 
         }
     </style>
-<x-app-layout>
+<x-app-layout >
     
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -14,7 +14,7 @@
 
     </x-slot>
 
-    <div class="flex flex-col justify-content-center items-center">
+    <div class="flex flex-col justify-content-center items-center" style="padding-top:80px;">
         <div class="flex flex-col justify-content-center items-center">
             <h1>Pontos : {{Auth::user()->getPointTableInfo()->point_value}}</h1>
             <h2>Pontos Hoje : {{$todayPoints}}</h2>
@@ -23,6 +23,7 @@
                 </x-nav-link>    
         </div>
     </div>
+    
 
     <div>
         <h2 class="text-tite">TAREFAS VARIAVEIS </h2>

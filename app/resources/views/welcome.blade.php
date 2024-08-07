@@ -12,17 +12,22 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- Styles -->
         <style>
-                body {
-                background: linear-gradient(to right, lightblue, lightgreen, gold);
+            h1 {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 40px!important;
+                color: #28CB8B;
+                font-weight: bold!important;
             }
         </style>
     </head>
     <body class=" min-h-screen flex justify-center items-center">
-        <div class="bg-teal-400 p-4 rounded-sm flex justify-center items-center flex-col">
-            <h1 class="text-center text-white  my-3  text-xl">Registro de Pontos do Rewards</h1>
-            <p>sistema para registro de pontos , estatistica de desempenho</p>
-            <a href="/register" class="bg-green-600 p-5 my-3 text-white rounded-xl text-center w-1/2" >Cadastro</a>
-            <a href="/login" class="bg-green-600 p-5 my-3 text-white rounded-xl text-center w-1/2" >Login</a>
+        <div class="bg-gray-100 p-4 rounded-xl flex justify-center items-center flex-col">
+            <h1>Rewards System</h1>
+            <div class="flex gap-5 ">
+                <a href="/register" style="background-color: #28CB8B;" class="p-3 my-3 text-white rounded-sm text-center w-1/2" >Cadastro</a>
+                <a href="/login" style="background-color: #28CB8B;" class="p-3 my-3 text-white rounded-sm text-center w-1/2" >Login</a>
+            </div>
+
         </div>
     </body>
 </html>

@@ -38,10 +38,12 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-
+            <a href="/register" style="font-size:15px; margin-left:1rem">No Login?</a>
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
-        </div>
+
+            
+
     </form>
 </x-guest-layout>
