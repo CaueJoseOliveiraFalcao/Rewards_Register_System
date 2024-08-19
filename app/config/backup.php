@@ -16,7 +16,6 @@ return [
                  */
                 'include' => [
                     base_path(),
-                    storage_path()
                 ],
 
                 /*
@@ -27,7 +26,6 @@ return [
                 'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
-                    storage_path('app/backups')
                 ],
 
                 /*
@@ -144,11 +142,16 @@ return [
              */
             'compression_level' => 9,
 
-
+            /*
+             * The filename prefix used for the backup zip file.
+             */
             'filename_prefix' => '',
 
+            /*
+             * The disk names on which the backups will be stored.
+             */
             'disks' => [
-                'back',
+                'local',
             ],
         ],
 
