@@ -72,11 +72,20 @@ class User extends Authenticatable
         ->where('name', 'MAIN TABLE')->first();
         return $userTablePointMain;
     }
+    public function getRescureTable(){
+        $userId =  Auth::user()->id;
+        $userTablePointMain = PointTable::where('user_id', $userId)
+        ->where('name', '!=' , 'MAIN TABLE')
+        ->where('type', 'SUBTRATION')
+        ->get();
+        return $userTablePointMain;
+    }
     public function getPointsRegisters()
     {
         $userId =  Auth::user()->id;
         $userTablePointMain = PointsRegister::where('user_id', $userId)
         ->where('table_name', '!=' , 'MAIN TABLE')
+        ->where('point_table_type', '!=' , 'SUBTRATION')
         ->get();
         return $userTablePointMain;
     }
