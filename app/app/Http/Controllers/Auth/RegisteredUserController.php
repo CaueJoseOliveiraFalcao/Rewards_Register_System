@@ -77,7 +77,7 @@ class RegisteredUserController extends Controller
             'is_streaked' => 1,
             'streak' => 1,
             'max_streak' => 0,
-            'point_value'=> 30,
+            'point_value'=> 15,
             'is_completed' => 0
         ]);
         PointTable::create([
@@ -111,28 +111,6 @@ class RegisteredUserController extends Controller
             'streak' => 0,
             'max_streak' => 0,
             'point_value'=> 90,
-            'is_completed' => 0
-        ]);
-        PointTable::create([
-            'user_id'=> $userid->id,
-            'name'=> 'Ler e Ganhar',
-            'type'=> 'BING',
-            'duration'=> 99999,
-            'is_streaked' => 0,
-            'streak' => 0,
-            'max_streak' => 0,
-            'point_value'=> 30,
-            'is_completed' => 0
-        ]);
-        PointTable::create([
-            'user_id'=> $userid->id,
-            'name'=> 'Atividades',
-            'type'=> 'BING_VARIAVEL',
-            'duration'=> 99999,
-            'is_streaked' => 0,
-            'streak' => 0,
-            'max_streak' => 0,
-            'point_value'=> 25,
             'is_completed' => 0
         ]);
         PointTable::create([
@@ -187,7 +165,7 @@ class RegisteredUserController extends Controller
             'is_streaked' => 0,
             'streak' => 0,
             'max_streak' => 0,
-            'point_value'=> 250,
+            'point_value'=> 275,
             'is_completed' => 0
         ]);
         PointTable::create([

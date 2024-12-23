@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\PointsRegister;
 use App\Models\PointTable;
+use App\Models\GiftCard;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Auth;
 use PHPUnit\Framework\Constraint\IsEmpty;
@@ -56,6 +57,11 @@ class User extends Authenticatable
     public function point(): HasMany
     {
         return $this->hasMany(PointTable::class);
+    }
+    
+    public function gift(): HasMany
+    {
+        return $this->hasMany(GiftCard::class);
     }
     public function getValidTables()
     {

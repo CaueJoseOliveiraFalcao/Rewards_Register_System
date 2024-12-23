@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/get-status', [PointRegister::class, 'return_status'])->name('return_status');
     Route::get('/rescure', [PointRegister::class, 'show_rescure'])->name('show_rescure');
     Route::post('/rescure', [PointRegister::class, 'rescure'])->name('rescure');
+    Route::get('/gift', [PointTableController::class, 'giftShow'])->name('giftshow');
+    Route::post('/createGift', [PointTableController::class, 'gift'])->name('giftcreate');
 });
 
 require __DIR__.'/auth.php';

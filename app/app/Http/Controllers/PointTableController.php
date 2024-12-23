@@ -94,6 +94,15 @@ class PointTableController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function giftShow(Request $request){
+        return view('substractionP');
+    }
+    public function subtraction(Request $request){
+        $user = Auth::user();
+        $mainTable = $user->getPointTableInfo();
+
+
+    }
     public function store(Request $request)
     {
         //
