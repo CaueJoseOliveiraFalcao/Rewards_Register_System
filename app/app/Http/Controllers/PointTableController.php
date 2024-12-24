@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PointsRegister;
 use App\Models\PointTable;
+use App\Models\GiftCard;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Auth;
@@ -97,11 +98,33 @@ class PointTableController extends Controller
     public function giftShow(Request $request){
         return view('substractionP');
     }
-    public function subtraction(Request $request){
+    public function gift(Request $request){
+        $request->validate([
+            'gift_value' => 'required|integer|min:1',
+        ], [
+            'gift_value.required' => 'O valor do Gift é obrigatório.',
+            'gift_value.integer' => 'O valor do Gift deve ser um número inteiro.',
+            'gift_value.min' => 'O valor do Gift deve ser no mínimo 1.',
+        ]);
+    
         $user = Auth::user();
         $mainTable = $user->getPointTableInfo();
+        $giftValue = intval($request->gift_value);
+        $userPoints = $mainTable->point_value;
 
+        if($giftValue > $userPoints){
+            return view('substractionP' , ['errorMessage' => 'Pontos insuficientes']);
+        }
+        $newGift = GiftCard::create([
+            'user_id' =>$user->id,
+            'gift_name' =>$request->gift_name,
+            'gift_value' => $giftValue,
+        ]);
 
+        $mainTable->point_value -= $giftValue;
+        $newGift->save();
+        $mainTable->save();
+        return redirect("dashboard");
     }
     public function store(Request $request)
     {

@@ -1,6 +1,11 @@
 
 <form action="/createGift" method="POST">
     <h1>Resgate De Pontos</h1>
+    @if(isset($errorMessage))
+        <div style='color:red;'>
+            {{ $errorMessage }}
+        </div>
+    @endif
     @csrf <!-- CSRF token for Laravel -->
     <label for="gift_name">Nome do Cartão Presente</label>
     <input type="text" id="gift_name" name="gift_name" required><br>
