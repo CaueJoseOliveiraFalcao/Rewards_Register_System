@@ -32,6 +32,33 @@
     </style>
 </head>
 <body>
+
+<h1>Resgate De Gifts</h1>
+    @if (isset($giftsMonth))
+
+        <table class="m-0 p-0">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Pontos</th>
+                    <th>Data</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($giftsMonth as $gift)
+                    <tr>
+                        <td>{{$gift->gift_name}}</td>
+                        <td>{{$gift->gift_value}}</td>
+                        <td>{{ \Carbon\Carbon::parse($gift->created_at)->format('d/m/Y H:i') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    
+    @else
+        <p class="no-data">Não há Gifts para este mês.</p>
+    @endif
     <h1>Registros deste Mês</h1>
     @if (isset($result['registers']) && count($result['registers']) > 0)
         <table class="m-0 p-0">
@@ -68,7 +95,7 @@
         </table>
     @else
         <p class="no-data">Não há registros para este mês.</p>
-    @endif
+    @endif 
 
     <h1>Pontos Extras deste Mês</h1>
     @if (isset($result['extraPoints']) && count($result['extraPoints']) > 0)

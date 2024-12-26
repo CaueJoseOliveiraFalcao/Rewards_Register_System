@@ -208,6 +208,20 @@ class User extends Authenticatable
         ];
 
     }
+    public function getMonthGifts($mounth , $year){
+        $user = Auth::user();
+        $allGifts = $user->gift;
+        $allGiftsThisMonth = [];
+        foreach ($allGifts as $key => $gift) {
+            $giftYear = $gift->created_at->format("Y");
+            $giftMounth = $gift->created_at->format("m");
+
+            if ($giftYear == $year && $giftMounth == $mounth){
+                $allGiftsThisMonth[] = $gift;
+            }
+        }
+        return $allGiftsThisMonth;
+    }
     public function pointsRegisters() : HasMany
     {
         return $this->hasMany(PointsRegister::class);

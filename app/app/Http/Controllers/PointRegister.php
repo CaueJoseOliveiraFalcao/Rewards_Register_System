@@ -81,6 +81,7 @@ class PointRegister extends Controller
         $user = Auth::user();
 
         $result = $user->getMonthPoints($request->month , $request->year);
-        return view('month-points' , compact('result'));
+        $giftsMonth = $user->getMonthGifts($request->month , $request->year);
+        return view('month-points' , compact('result' , 'giftsMonth'));
     }
 }

@@ -200,6 +200,7 @@
                 <li><a href="/tablePointCreator">Criar Nova Tarefa</a></li>
                 <li><a href="/create-extra-point">Adicionar Pontos Extras</a></li>
                 <li><a href="/show-status">Relatorio Mensal</a></li>
+                <li><a href="/gift">Resgate</a></li>
             </ul>
             <div class="shrink-0 flex items-center">
                 <div>

@@ -25,23 +25,21 @@
     </div>
     
     <div>
-        @isset(Auth::user()->gift)
-        <h2 class="text-tite">Gifts Cards Resgatafos</h2>
-    <div class="task-container">
+    @isset(Auth::user()->gift)
+    <h2 class="text-tite">Gifts Cards Resgatafos</h2>
+        <div class="task-container">
             @foreach(Auth::user()->gift as $info)
                     <div class='each-div'>
                         <div class="card">
                             <div class="flex">
                                 <div class="task-name"><span>{{ $info->gift_name }}</span></div>
-                            </div>
 
-                            <div class="task-points">Pontos: <span>{{ $info->gift_value }}</span></div>
+                                <div class="task-points">Pontos: <span>{{ $info->gift_value }}</span></div>
                             </div>
                         </div>
-
                     </div>
             @endforeach
-    </div>
+        </div>
     @endisset
     <div>
         <h2 class="text-tite">TAREFAS VARIAVEIS </h2>
