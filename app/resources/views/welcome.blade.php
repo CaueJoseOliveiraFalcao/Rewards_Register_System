@@ -18,16 +18,100 @@
                 color: #28CB8B;
                 font-weight: bold!important;
             }
+            .nav-text{
+                font-weight: bold;
+                color: white;
+                border-radius: 8px;
+                padding: 1rem;
+                align-items: center;
+                transition: .3s
+            }
+            .nav-text:hover{
+                background-color: #29b17a!important;
+            }
+            .size-div{
+                display: flex;
+
+                justify-content: center;
+                max-width: 100%;
+                height: 100%;
+            }
+            .info-div {
+                background-color: rgb(53, 53, 53);
+                display: flex;
+                flex-wrap: wrap;
+                padding-top: 2rem;
+                justify-content: center;
+                align-items: center;
+                gap:2rem;
+            }
+
+            @media (max-width: 1024px) {
+                .info-div {
+                    flex-direction: column !important;
+                }
+            }
+            body{
+                background-color: rgb(53, 53, 53);
+            }
+            header{
+                background-color: black;
+
+            }
+            .back-img{
+                background: url('welcome.jpg');
+                width: 50%;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                height: 100%;
+            }
+            .info-div2{
+                width: 40%; 
+                height: 100%;
+            }
+            p{
+                color: #28CB8B;
+                font-size: 22px;
+            }
         </style>
     </head>
-    <body class=" min-h-screen flex justify-center items-center">
-        <div class="bg-gray-100 p-4 rounded-xl flex justify-center items-center flex-col">
+    <header>
+    <div class=" p-4 rounded-xl flex justify-between">
             <h1>Rewards System</h1>
-            <div class="flex gap-5 ">
-                <a href="/register" style="background-color: #28CB8B;" class="p-3 my-3 text-white rounded-sm text-center w-1/2" >Cadastro</a>
-                <a href="/login" style="background-color: #28CB8B;" class="p-3 my-3 text-white rounded-sm text-center w-1/2" >Login</a>
+            <div class="flex gap-5 items-center ">
+                <a href="/register" style="background-color: #28CB8B;" class="nav-text" >Cadastro</a>
+                <a href="/login" style="background-color: #28CB8B;" class="nav-text" >Login</a>
             </div>
 
         </div>
+    </header>
+    <body class="">
+        <div class="size-div">
+            <div class="info-div " >
+                <div class="back-img">
+                </div>
+                <div class="info-div2">
+                    <h1>O que é o Rewards System?</h1>
+                    <p style="margin-top: 4rem;">
+                        O Rewards System é uma plataforma onde você pode registrar, diariamente, seus pontos do 
+                        Microsoft Rewards, oferecendo funcionalidades adicionais que não são fornecidas pela Microsoft, 
+                        como relatórios detalhados de pontos.
+                    </p>
+                    <p style="margin-top: 4rem;">
+                        Trata-se de um sistema totalmente modular. Quando uma tarefa do Rewards é alterada, você pode 
+                        atualizar o valor correspondente diretamente no sistema de forma dinâmica.
+                    </p>
+                    <p style="margin-top: 4rem;">
+                        Dentro do sistema, você encontrará tarefas pré-configuradas, prontas para serem ajustadas com 
+                        base nos pontos do Rewards. Além disso, o sistema oferece relatórios mensais detalhados que mostram 
+                        quando e quanto cada tarefa contribuiu para o seu total de pontos, bem como o histórico de resgates 
+                        de gift cards, todos devidamente registrados.
+                    </p>
+                    
+                 </div>
+            </div>
+        </div>
+        
     </body>
 </html>

@@ -16,7 +16,7 @@
     </head>
     <style>
         * {
-            font-family: Arial, Helvetica, sans-serif!important;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif!important;
         }
     </style>
     <body class="font-sans antialiased">
