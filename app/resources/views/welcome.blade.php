@@ -43,7 +43,7 @@
                 padding-top: 2rem;
                 justify-content: center;
                 align-items: center;
-                gap:2rem;
+                gap:2rem;s
             }
 
             @media (max-width: 1024px) {
