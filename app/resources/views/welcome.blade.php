@@ -15,7 +15,7 @@
             h1 {
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: 40px!important;
-                color: #28CB8B;
+                color: #036666;
                 font-weight: bold!important;
             }
             .nav-text{
@@ -27,7 +27,7 @@
                 transition: .3s
             }
             .nav-text:hover{
-                background-color: #29b17a!important;
+                background-color: #88d4ab!important;
             }
             .size-div{
                 display: flex;
@@ -37,25 +37,48 @@
                 height: 100%;
             }
             .info-div {
-                background-color: rgb(53, 53, 53);
+                background-color:#88d4ab;
                 display: flex;
-                flex-wrap: wrap;
                 padding-top: 2rem;
                 justify-content: center;
                 align-items: center;
-                gap:2rem;s
+                gap:2rem;
+                margin-top:3rem;
             }
 
             @media (max-width: 1024px) {
                 .info-div {
                     flex-direction: column !important;
                 }
+                .info-div2{
+                    margin: 0;
+                    width: 100%!important;
+                    height: 100%!important;
+                    padding: 2rem;
+                }
+                .back-img{
+                    border-radius: 10px;
+                    min-width: 300px!important;
+                    min-height: 300px!important;
+                    max-width: 400px!important;
+                    max-height: 400px!important;
+                }
+                h1{
+                    font-size: 24px!important;
+                }
+                .nav-text{
+                    padding: 0.5rem
+                }
+                p{
+                    font-size: 17px!important;
+                    margin-top: 2rem!important;
+                }
             }
             body{
-                background-color: rgb(53, 53, 53);
+                background-color:#88d4ab;
             }
             header{
-                background-color: black;
+                background-color: #56ab91;
 
             }
             .back-img{
@@ -71,7 +94,7 @@
                 height: 100%;
             }
             p{
-                color: #28CB8B;
+                color: #036666;
                 font-size: 22px;
             }
         </style>
