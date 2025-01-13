@@ -37,6 +37,7 @@
 .table-body td:last-child {
     display: flex;
     text-align: center;
+    z-index: 999;
     justify-content: center;
 
 }
@@ -49,7 +50,9 @@
 .bing-th-td{
     background-color: #87CEEB;
 }
-
+.xbox-th-td{
+    background-color: #107C10;
+}
 
 .table-body tbody tr:hover {
   background-color: #d4edda; /* Realce em verde claro ao passar o mouse */
@@ -73,6 +76,7 @@
   height: 40px;
   border-radius: 50%; /* Botão circular */
   position: relative;
+  cursor: pointer;
   overflow: hidden;
   background-color: transparent; /* Transparente por padrão */
   border: 2px solid #f39c12; /* Cor inicial para tarefas incompletas */
@@ -136,6 +140,7 @@
 }
 
 .task-button-confirm.awaiting::before {
+    pointer-events: none
   content: 'X'; /* Símbolo de tarefa pendente */
   color: rgba(255, 255, 255, 0.7); /* Branco translúcido */
   font-size: 16px; /* Ajusta o tamanho do símbolo */
@@ -203,13 +208,13 @@
                 <th class="variable-th-td">TAREFAS VARIAVEIS</th>
                 <th class="variable-th-td">Pontos</th>
                 <th class="variable-th-td">Status</th>
+                <th class="variable-th-td">Editar</th>
               </tr>
             </thead>
             <tbody>
                 @foreach(Auth::user()->getValidTables() as $info)
                     @if($info->type === "BING_VARIAVEL" || $info->type === "XBOX_VARIAVEL")
                     <tr>
-                        
                         @if ($info->streak > 0)
                             <td  class="variable-th-td">{{$info->name + ' ' + $info->streak + 🔥}}</td>
                         @else 
@@ -222,6 +227,11 @@
                                 {{ $info->is_completed ? '✔️' : 'X' }}
                                 </a>
                             </div>
+                        </td>
+                        <td class="variable-th-td" style="display: table-cell;">
+                            <div class="edit-div">
+                                <a href="/edit-table/{{$info->id}}">✏️</a>
+                                </div>
                         </td>
                     </tr>
                     @endif 
@@ -236,6 +246,7 @@
                     <th class="bing-th-td">TAREFAS BING</th>
                     <th class="bing-th-td">Pontos</th>
                     <th class="bing-th-td">Status</th>
+                    <th class="bing-th-td">Editar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -256,43 +267,56 @@
                                     </a>
                                 </div>
                             </td>
+                            <td class="bing-th-td" style="display: table-cell;">
+                                <div class="edit-div">
+                                    <a href="/edit-table/{{$info->id}}">✏️</a>
+                                    </div>
+                            </td>
                         </tr>
                         @endif 
                         @endforeach
                 </tbody>
               </table>
         </div>
-    <div class="task-container">
-            @foreach(Auth::user()->getValidTables() as $info)
-                @if($info->type === "BING")
-                    <div class='each-div' style="background-color: #87CEEB">
-                        <div class="card">
-                            <div class="flex">
-                                <div class="task-name"><span>{{ $info->name }}</span></div>
-                                @if ($info->streak > 0)
-                                <div class="task-sequence">🔥 <span>{{ $info->streak }}</span></div>
-                                @endif
-                            </div>
-
-                            <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
-                            <div class='flex'>
-                                <div class="task-complete mr-2">
-                                    <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
-                                        <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
-                                        {{ $info->is_completed ? '✔️' : 'X' }}
-                                        </a>
-                                    </div>
+        <div>
+            <table class="table-body">
+                <thead>
+                  <tr>
+                    <th class="xbox-th-td">TAREFAS Xbox</th>
+                    <th class="xbox-th-td">Pontos</th>
+                    <th class="xbox-th-td">Status</th>
+                    <th class="xbox-th-td">Editar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach(Auth::user()->getValidTables() as $info)
+                    @if($info->type === "XBOX")
+                        <tr>
+                            
+                            @if ($info->streak > 0)
+                                <td  class="xbox-th-td">{{$info->name . ' ' . $info->streak . '🔥'}}</td>
+                            @else 
+                                <td  class="xbox-th-td">{{$info->name}}</td>
+                            @endif
+                            <td  class="xbox-th-td">{{ $info->point_value }}</td>
+                            <td  class="xbox-th-td">
+                                <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
+                                    <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
+                                    {{ $info->is_completed ? '✔️' : 'X' }}
+                                    </a>
                                 </div>
+                            </td>
+                            <td class="xbox-th-td" style="display: table-cell;">
                                 <div class="edit-div">
-                                <a href="/edit-table/{{$info->id}}">✏️</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                @endif
-            @endforeach
-    </div>
+                                    <a href="/edit-table/{{$info->id}}">✏️</a>
+                                    </div>
+                            </td>
+                        </tr>
+                        @endif 
+                        @endforeach
+                </tbody>
+              </table>
+        </div>
     <h2 class="text-tite">TAREFAS XBOX </h2>
     <div class="task-container">
         @foreach(Auth::user()->getValidTables() as $info)
@@ -359,7 +383,9 @@
     .edit-div{
         width: 30px;
         height: 30px;
+        border-radius: 5px;
         background-color: blue;
+        padding: 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
