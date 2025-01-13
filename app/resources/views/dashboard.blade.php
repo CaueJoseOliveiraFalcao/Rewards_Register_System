@@ -71,91 +71,57 @@
 
 /* Botão de tarefa */
 .task-button-confirm {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* Botão circular */
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  background-color: transparent; /* Transparente por padrão */
-  border: 2px solid #f39c12; /* Cor inicial para tarefas incompletas */
-  transition: all 0.5s ease-in-out; /* Suaviza a transição */
+    padding: 1rem;
 }
 
 .task-button-confirm::before {
-  content: 'X'; /* Símbolo inicial */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.7); /* Branco translúcido */
-  transition: all 0.5s ease-in-out; /* Transição suave */
+
 }
 
 .task-button-confirm.completed {
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff; /* Fundo branco ao completar */
-  border: 2px solid #fff; /* Define uma borda verde visível */
-  transition: all 0.3s ease-in-out; /* Transição suave */
-
-}
-
-.task-button-confirm.completed::before {
-  content: '✔️'; /* Símbolo de certo */
-  color: rgba(255, 255, 255, 1); /* Branco visível inicialmente */
-  font-size: 16px; /* Ajusta o tamanho do símbolo */
-  transition: all 0.3s ease-in-out; /* Suaviza a transição */
-  position: absolute;
-}
-
-/* Estilo ao passar o mouse */
-.task-button-confirm.completed:hover {
-  color: white; /* Torna o símbolo principal invisível */
-  background-color: transparent; /* Fundo transparente */
-  border-color: #fff; /* Torna a borda branca */
-}
-
-.task-button-confirm.completed:hover::before {
-  color: rgba(255, 255, 255, 0); /* Torna o símbolo invisível */
-  background-color: transparent; /* Sem fundo para o pseudo-elemento */
-}
-.task-button-confirm.awaiting {
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 35px;
+    border-style: solid;
+    border-color: white;
     height: 35px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent; /* Fundo transparente para tarefas incompletas */
-  border: 2px solid #f39c12; /* Laranja para borda de tarefas incompletas */
-  transition: all 0.3s ease-in-out; /* Suaviza a transição */
-  position: relative; /* Necessário para o pseudo-elemento */
+    border-radius: 5px;
+    transition: .3s all;
+}
+.task-button-confirm.completed:hover {
+    background: transparent;
+    border-style: solid;
+    border-color: white;
 }
 
-.task-button-confirm.awaiting::before {
-    pointer-events: none
-  content: 'X'; /* Símbolo de tarefa pendente */
-  color: rgba(255, 255, 255, 0.7); /* Branco translúcido */
-  font-size: 16px; /* Ajusta o tamanho do símbolo */
-  transition: all 0.3s ease-in-out; /* Suaviza a transição */
-  position: absolute;
+.task-button-confirm.awaiting {
+    background-color:rgb(214, 0, 0);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    border-style: solid;
+    border-color: white;
+    height: 35px;
+    border-radius: 5px;
+    transition: .3s all;
+
 }
 
 /* Estilo ao passar o mouse */
 .task-button-confirm.awaiting:hover {
-  background-color: #f39c12; /* Fundo laranja ao passar o mouse */
-  border-color: transparent; /* Remove a borda */
+    background: transparent;
+    border-style: solid;
+    border-color: white;
 }
 
+
 .task-button-confirm.awaiting:hover::before {
-  color: rgba(255, 255, 255, 1); /* Torna o símbolo visível */
+
 }
 
     </style>
@@ -317,38 +283,6 @@
                 </tbody>
               </table>
         </div>
-    <h2 class="text-tite">TAREFAS XBOX </h2>
-    <div class="task-container">
-        @foreach(Auth::user()->getValidTables() as $info)
-            @if($info->type === "XBOX")
-                <div class='each-div' style="background-color: #107C10;">
-                    <div class="card">
-                        <div class="flex">
-                            <div class="task-name"><span>{{ $info->name }}</span></div>
-                            @if ($info->streak > 0)
-                            <div class="task-sequence">🔥 <span>{{ $info->streak }}</span></div>
-                            @endif
-                        </div>
-
-                        <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
-                        <div class='flex'>
-                            <div class="task-complete mr-2">
-                                <div class="task-button-confirm {{ $info->is_completed ? 'completed' : 'awaiting' }}">
-                                    <a href="{{ $info->is_completed ? '#' : route('register.create' , ['id' => $info->id])}}">
-                                    {{ $info->is_completed ? '✔️' : 'X' }}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="edit-div">
-                            <a href="/edit-table/{{$info->id}}">✏️</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            @endif
-        @endforeach
-</div>
         <h1 class="text-tite">PONTOS EXTRAS</h1>
         <div class="task-container">
             @foreach(Auth::user()->getExtraPoints() as $info)
