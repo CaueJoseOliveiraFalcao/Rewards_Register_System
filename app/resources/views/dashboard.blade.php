@@ -286,7 +286,7 @@
         <h1 class="text-tite">PONTOS EXTRAS</h1>
         <div class="task-container">
             @foreach(Auth::user()->getExtraPoints() as $info)
-            <div class='each-div'>
+            <div class='each-div'>h
                 <div class="task-name"><span>{{ $info->table_name }}</span></div>
                     <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
                     <div class='flex'>
