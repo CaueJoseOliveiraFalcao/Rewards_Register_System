@@ -4,15 +4,13 @@
         }
         /* Tabela geral */
 .table-body {
-  max-width: 500px;
+  min-width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 16px;
   text-align: left;
-  border-radius: 10px;
-  border-radius: 15px; /* Bordas arredondadas */
   overflow: hidden; /* Garante que o conteúdo respeite as bordas arredondadas */
-
+  table-layout: fixed;
   color: #333;
 }
 
@@ -22,11 +20,18 @@
   text-transform: uppercase;
   font-weight: bold;
 }
-
+.table-body tbody tr td {
+  height: 60px; /* Define uma altura fixa para todas as células */
+}
 .table-body th, .table-body td {
   padding: 1rem;
   color: white!important;
+  text-align: -webkit-center!important;
+  vertical-align: middle; /* Centraliza verticalmente */
 
+}
+.table-body th {
+  width: 25%; /* Define largura fixa para cada coluna */
 }
 
 .variable-th-td{
@@ -36,16 +41,33 @@
 }
 .table-body td:last-child {
     display: flex;
-    text-align: center;
     z-index: 999;
-    justify-content: center;
 
+
+}
+@media (max-width: 768px){
+    .table-body tbody tr td {
+    height: 100px;
+    font-size: 12px;
+    vertical-align: middle !important;
+    padding: 0.2rem;
+    display: table-cell !important;
+    
+}
+    .th{
+        font-size: 15px;
+    }
+    .table-body th {
+        width: 15%; /* Define largura fixa para cada coluna */
+        font-size: 13px;
+    }
 }
 
 
 .gift-th-td{
     color: white!important;
     background-color: rgb(161, 3, 3);
+
 }
 .bing-th-td{
     background-color: #87CEEB;
@@ -66,12 +88,16 @@
 
 .table-body td:last-child {
   text-align: center;
+
 }
 
 
 /* Botão de tarefa */
 .task-button-confirm {
     padding: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent;
 }
 
 .task-button-confirm::before {
@@ -85,8 +111,6 @@
     justify-content: center;
     align-items: center;
     width: 35px;
-    border-style: solid;
-    border-color: white;
     height: 35px;
     border-radius: 5px;
     transition: .3s all;
@@ -98,14 +122,12 @@
 }
 
 .task-button-confirm.awaiting {
-    background-color:rgb(214, 0, 0);
+    background-color:rgb(233, 23, 23);
     color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 35px;
-    border-style: solid;
-    border-color: white;
     height: 35px;
     border-radius: 5px;
     transition: .3s all;
@@ -116,12 +138,13 @@
 .task-button-confirm.awaiting:hover {
     background: transparent;
     border-style: solid;
-    border-color: white;
+    border-color: red;
 }
 
 
 .task-button-confirm.awaiting:hover::before {
-
+    border-style: solid;
+    border-color: white;
 }
 
     </style>
@@ -154,13 +177,15 @@
                   <tr>
                     <th class="gift-th-td">GIFT CARDS</th>
                     <th class="gift-th-td">Pontos</th>
+                    <th class="gift-th-td">Data de Resgate</th>
                   </tr>
                 </thead>
                 <tbody>
                     @foreach(Auth::user()->gift as $info)
                         <tr>
-                                <td  class="gift-th-td">{{ $info->gift_name }}</td>
-                            <td  class="gift-th-td">{{ $info->gift_value }}</td>
+                            <td  class="gift-th-td">{{ $info->gift_name }}</td>
+                            <td  class="gift-th-td"  >{{ $info->gift_value }}</td>
+                            <td  class="gift-th-td" style="display: flex;justify-content:center;">{{ \Carbon\Carbon::parse($info->created_at)->format('d/m/Y H:i') }}</td>
                         </tr>
                         @endforeach
                 </tbody>
@@ -283,26 +308,34 @@
                 </tbody>
               </table>
         </div>
-        <h1 class="text-tite">PONTOS EXTRAS</h1>
-        <div class="task-container">
-            @foreach(Auth::user()->getExtraPoints() as $info)
-            <div class='each-div'>h
-                <div class="task-name"><span>{{ $info->table_name }}</span></div>
-                    <div class="task-points">Pontos: <span>{{ $info->point_value }}</span></div>
-                    <div class='flex'>
-                        <div class="task-complete mr-2">
-                            <div class="task-button-confirm delete">
+            <?php if (Auth::user() && Auth::user()->getExtraPoints() !== null):?>
+            <div class="task-container">
+                <table class="table-body">
+                    <thead>
+                    <tr>
+                        <th class="gift-th-td">PONTOS EXTRAS</th>
+                        <th class="gift-th-td">Pontos</th>
+                        <th class="gift-th-td">Data Criação</th>
+                        <th class="gift-th-td">Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(Auth::user()->getExtraPoints() as $info)
+                            <tr>
+                                <td  class="gift-th-td">{{ $info->table_name }}</td>
+                                <td  class="gift-th-td">{{ $info->point_value }}</td>
+                                <td  class="gift-th-td">{{ \Carbon\Carbon::parse($info->created_at)->format('d/m/Y H:i') }}</td>
+                                <td  class="gift-th-td"  style="display: flex;justify-content:center;"> 
                                 <form method="POST" action="delete-extra-point/{{$info->id}}">
                                     @csrf
                                     <input value="🗑️" type="submit"/>
-                                        
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                                </form></td>
+                            </tr>
+                            @endforeach
+                    </tbody>
+                </table>
             </div>
-    
-            @endforeach
+    @endisset
     </div>
 
     </div>
@@ -327,9 +360,6 @@
     .task-container{
         display: flex;
         flex-wrap: wrap;
-        padding-left: 3rem;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
         gap: 1rem;
         width: 100%;
         flex-direction: row;
