@@ -77,7 +77,7 @@ class RegisteredUserController extends Controller
             'is_streaked' => 1,
             'streak' => 1,
             'max_streak' => 0,
-            'point_value'=> 15,
+            'point_value'=> 30,
             'is_completed' => 0
         ]);
         PointTable::create([
@@ -115,13 +115,35 @@ class RegisteredUserController extends Controller
         ]);
         PointTable::create([
             'user_id'=> $userid->id,
+            'name'=> 'Ler Para Ganhar',
+            'type'=> 'BING',
+            'duration'=> 99999,
+            'is_streaked' => 0,
+            'streak' => 0,
+            'max_streak' => 0,
+            'point_value'=> 30,
+            'is_completed' => 0
+        ]);
+        PointTable::create([
+            'user_id'=> $userid->id,
+            'name'=> 'Mais Atividades',
+            'type'=> 'BING',
+            'duration'=> 99999,
+            'is_streaked' => 0,
+            'streak' => 0,
+            'max_streak' => 0,
+            'point_value'=> 25,
+            'is_completed' => 0
+        ]);
+        PointTable::create([
+            'user_id'=> $userid->id,
             'name'=> 'Jogar um Jogo no PC',
             'type'=> 'XBOX',
             'duration'=> 99999,
             'is_streaked' => 0,
             'streak' => 0,
             'max_streak' => 0,
-            'point_value'=> 20,
+            'point_value'=> 10,
             'is_completed' => 0
         ]);
         PointTable::create([
@@ -160,12 +182,23 @@ class RegisteredUserController extends Controller
         PointTable::create([
             'user_id'=> $userid->id,
             'name'=> 'Bonus Semanal de Console',
-            'type'=> 'XBOX_VARIAVEL',
+            'type'=> 'XBOX',
             'duration'=> 99999,
             'is_streaked' => 0,
             'streak' => 0,
             'max_streak' => 0,
-            'point_value'=> 275,
+            'point_value'=> 150,
+            'is_completed' => 0
+        ]);
+        PointTable::create([
+            'user_id'=> $userid->id,
+            'name'=> 'Bonus Semanal de PC',
+            'type'=> 'XBOX',
+            'duration'=> 99999,
+            'is_streaked' => 0,
+            'streak' => 0,
+            'max_streak' => 0,
+            'point_value'=> 150,
             'is_completed' => 0
         ]);
         PointTable::create([
@@ -176,65 +209,42 @@ class RegisteredUserController extends Controller
             'is_streaked' => 0,
             'streak' => 0,
             'max_streak' => 0,
-            'point_value'=> 3,
+            'point_value'=> 10,
             'is_completed' => 0
         ]);
         PointTable::create([
             'user_id'=> $userid->id,
-            'name'=> 'Ganhar uma Conquista',
+            'name'=> 'Sequencia Semanal Bonus',
             'type'=> 'XBOX',
             'duration'=> 99999,
             'is_streaked' => 0,
             'streak' => 0,
             'max_streak' => 0,
-            'point_value'=> 5,
+            'point_value'=> 20,
             'is_completed' => 0
         ]);
         PointTable::create([
             'user_id'=> $userid->id,
-            'name'=> 'Game Pass Ultimate Bonus 25',
+            'name'=> 'Pacote Mensal 4 jogos',
             'type'=> 'XBOX',
             'duration'=> 99999,
             'is_streaked' => 0,
             'streak' => 0,
             'max_streak' => 0,
-            'point_value'=> 25,
+            'point_value'=> 50,
             'is_completed' => 0
         ]);
         PointTable::create([
             'user_id'=> $userid->id,
-            'name'=> 'Game Pass Ultimate Bonus 100',
+            'name'=> 'Pacote Mensal 8 jogos',
             'type'=> 'XBOX',
             'duration'=> 99999,
             'is_streaked' => 0,
             'streak' => 0,
             'max_streak' => 0,
-            'point_value'=> 100,
+            'point_value'=> 350,
             'is_completed' => 0
         ]);
-        PointTable::create([
-            'user_id'=> $userid->id,
-            'name'=> 'Game Pass Ultimate Bonus 500',
-            'type'=> 'XBOX',
-            'duration'=> 99999,
-            'is_streaked' => 0,
-            'streak' => 0,
-            'max_streak' => 0,
-            'point_value'=> 500,
-            'is_completed' => 0
-        ]);
-        PointTable::create([
-            'user_id'=> $userid->id,
-            'name'=> 'Game Pass Ultimate Bonus 1000',
-            'type'=> 'XBOX',
-            'duration'=> 99999,
-            'is_streaked' => 0,
-            'streak' => 0,
-            'max_streak' => 0,
-            'point_value'=> 1000,
-            'is_completed' => 0
-        ]);
-        
         $pointTable = PointTable::where('user_id', $userid->id)
         ->where('name', $tableMainP->name)
         ->first();
