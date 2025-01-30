@@ -109,7 +109,7 @@ class RegisteredUserController extends Controller
             'duration'=> 99999,
             'is_streaked' => 0,
             'streak' => 0,
-            'max_streak' => 700,
+            'max_streak' => 900,
             'point_value'=> 90,
             'is_completed' => 0
         ]);
