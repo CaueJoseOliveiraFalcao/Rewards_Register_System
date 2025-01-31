@@ -113,7 +113,7 @@
                     <tr>
                         <td>{{$extraPoint->table_name}}</td>
                         <td>{{ \Carbon\Carbon::parse($extraPoint['created_at'])->format('d/m/Y H:i') }}</td>
-                        <td>{{ $extraPoint->point_value}}</td>
+                        <td class="points_values">{{ $extraPoint->point_value}}</td>
 
                     </tr>
                 @endforeach
