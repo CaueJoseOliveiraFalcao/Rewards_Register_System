@@ -84,7 +84,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Total de Tarefas do Mês</th>
+                    <th>Total de Tarefas Do Mês</th>
                 </tr>
             </thead>
             <tbody>
