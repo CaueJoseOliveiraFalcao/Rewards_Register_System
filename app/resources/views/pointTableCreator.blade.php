@@ -1,30 +1,34 @@
-
-<form action="/createNewTablePoint" method="post">
-    @csrf
-    <h1>CRIAÇÃO DE TAREFAS DO REWARDS</h1>
-    @csrf <!-- CSRF token for Laravel -->
-    <label for="task_name">Nome da Tarefa:</label>
-    <input type="text" id="task_name" name="task_name"><br>
-
-    <label for="table_type">Tipo da Tabela:</label>
-    <select id="table_type" name="table_type">
-        <option value="XBOX">XBOX</option>
-        <option value="BING">BING</option>
-    </select><br>
-    <div class="check-fix">
-        <label for="daily_accumulation">Tem acumulação diária:</label>
-        <input type="checkbox" id="daily_accumulation" name="daily_accumulation">
+<div>
+    <div class="mid-div">
+        <form action="/createNewTablePoint" method="post">
+            @csrf
+            <h1>CRIAÇÃO DE TAREFAS DO REWARDS</h1>
+            @csrf <!-- CSRF token for Laravel -->
+            <label for="task_name">Nome da Tarefa:</label>
+            <input type="text" id="task_name" name="task_name"><br>
+        
+            <label for="table_type">Tipo da Tabela:</label>
+            <select id="table_type" name="table_type">
+                <option value="XBOX">XBOX</option>
+                <option value="BING">BING</option>
+            </select><br>
+            <div class="check-fix">
+                <label for="daily_accumulation">Tem acumulação diária:</label>
+                <input type="checkbox" id="daily_accumulation" name="daily_accumulation">
+            </div>
+        
+        
+            <label for="current_sequence">Sequencia atual da tarefa:</label>
+            <input type="number" id="current_sequence" name="current_sequence"><br>
+        
+            <label for="points_value">Valor em pontos da Tarefa:</label>
+            <input type="number" id="points_value" name="points_value"><br>
+        
+            <input type="submit" value="Submit">
+        </form>
     </div>
+</div>
 
-
-    <label for="current_sequence">Sequencia atual da tarefa:</label>
-    <input type="number" id="current_sequence" name="current_sequence"><br>
-
-    <label for="points_value">Valor em pontos da Tarefa:</label>
-    <input type="number" id="points_value" name="points_value"><br>
-
-    <input type="submit" value="Submit">
-</form>
 <style>
     .check-fix{
         margin-top: 1rem;
@@ -41,11 +45,21 @@
     padding: 20px;
 }
 
-form {
+.mid-div{
     max-width: 600px;
     margin: 0 auto;
 }
-
+@media (max-width: 1250px) {
+    .mid-div{
+    max-width: 100%;
+}
+    h1{
+        font-size: 37px;
+    }
+    label , input{
+        font-size: 20px;
+    }
+}
 label {
     display: block;
     margin-top: 10px;

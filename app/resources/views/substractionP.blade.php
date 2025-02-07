@@ -1,18 +1,20 @@
+<div class="mid-div">
+    <form action="/createGift" method="POST">
+        <h1>Resgate De Pontos</h1>
+        @if(isset($errorMessage))
+            <div style='color:red;'>
+                {{ $errorMessage }}
+            </div>
+        @endif
+        @csrf <!-- CSRF token for Laravel -->
+        <label for="gift_name">Nome do Cartão Presente</label>
+        <input type="text" id="gift_name" name="gift_name" required><br>
+        <label for="gift_value">Valor Do Cartão Presente</label>
+        <input type="number"  id="gift_value" name="gift_value" required><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 
-<form action="/createGift" method="POST">
-    <h1>Resgate De Pontos</h1>
-    @if(isset($errorMessage))
-        <div style='color:red;'>
-            {{ $errorMessage }}
-        </div>
-    @endif
-    @csrf <!-- CSRF token for Laravel -->
-    <label for="gift_name">Nome do Cartão Presente</label>
-    <input type="text" id="gift_name" name="gift_name" required><br>
-    <label for="gift_value">Valor Do Cartão Presente</label>
-    <input type="number"  id="gift_value" name="gift_value" required><br>
-    <input type="submit" value="Submit">
-</form>
 <style>
     .check-fix{
         margin-top: 1rem;
@@ -28,12 +30,21 @@
     font-family: Arial, sans-serif;
     padding: 20px;
 }
-
-form {
+.mid-div{
     max-width: 600px;
     margin: 0 auto;
 }
-
+@media (max-width: 1250px) {
+    .mid-div{
+    max-width: 100%;
+}
+    h1{
+        font-size: 37px;
+    }
+    label , input{
+        font-size: 20px;
+    }
+}
 label {
     display: block;
     margin-top: 10px;
