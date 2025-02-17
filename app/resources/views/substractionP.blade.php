@@ -42,7 +42,7 @@
         font-size: 37px;
     }
     label , input{
-        font-size: 21px;
+        font-size: 21.5px;
     }
 }
 label {
