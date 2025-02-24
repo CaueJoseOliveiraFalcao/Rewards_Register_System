@@ -28,7 +28,7 @@
     }
     body {
     font-family: Arial, sans-serif;
-    padding: 20px;
+    padding: 20.4px;
 }
 .mid-div{
     max-width: 600px;
